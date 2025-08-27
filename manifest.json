@@ -1,0 +1,34 @@
+{
+  "name": "Token Highlighter",
+  "description": "Captures Authorization token from API headers and highlights keywords on the page.",
+  "version": "1.0.0",
+  "manifest_version": 3,
+
+  "permissions": [
+    "webRequest",
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "https://admin.ltimindtree.iamneo.ai/*",
+    "https://admin.neowise.examly.io/",
+    "https://api.examly.io/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [ 
+        "https://admin.ltimindtree.iamneo.ai/school/questionbank/*",
+        "https://admin.neowise.examly.io/*"
+    ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
