@@ -177,6 +177,7 @@
 // });
 
 // --- Styles for highlights ---
+
 (function injectStyle() {
   const css = `
     .qb-mark { 
@@ -220,7 +221,10 @@ function wrapMatchesInTextNode(textNode, qbNames, token) {
   if (!text || !qbNames || qbNames.length === 0) return false;
 
   // Build regex dynamically
-  const regex = new RegExp("(" + qbNames.map(escapeRegex).join("|") + ")", "gi");
+//   const regex = new RegExp("(" + qbNames.map(escapeRegex).join("|") + ")", "gi");
+  // Build regex dynamically (exact match only)
+    const regex = new RegExp("(?<!\\w)(" + qbNames.map(escapeRegex).join("|") + ")(?!\\w)", "gi");
+
   if (!regex.test(text)) return false;
 
   const frag = document.createDocumentFragment();
